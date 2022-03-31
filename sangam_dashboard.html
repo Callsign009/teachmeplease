@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
   <style media="screen">
-    #div2, #div3, #div4 {
+    #div2,
+    #div3,
+    #div4 {
       display: none;
     }
   </style>
@@ -57,7 +59,72 @@ uration-150">
                 </svg>
                 <span class="font-semibold">Setting</span>
               </li>
-              <button class="w-full mt-10 bg-[#EC5252] rounded-full py-1.5 text-white">Learn</button>
+              <div x-data="{ modelOpen: false }">
+                <button @click="modelOpen =!modelOpen" class="w-full mt-10 bg-[#EC5252] rounded-full py-1.5 text-white">+ Add Course</button>
+                <!-- adding course model -->
+                <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                  <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
+                    <div x-cloak @click="modelOpen = false" x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                      x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true">
+                    </div>
+
+                    <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                      x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                      x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
+                      <div class="flex items-center justify-between space-x-4">
+                        <h1 class="text-xl font-medium text-gray-800 ">Add course</h1>
+
+                        <button @click="modelOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </button>
+                      </div>
+
+                      <p class="mt-2 text-sm text-gray-500 ">
+                        Add this course to your account and assist others with it as well.
+                      </p>
+
+                      <form class="mt-5">
+                        <div>
+                          <label for="user name" class="block text-sm text-gray-700 capitalize dark:text-gray-200">Course Name</label>
+                          <input placeholder="Course Name" type="text"
+                            class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                        </div>
+
+                        <div class="mt-4">
+                          <label for="email" class="block text-sm text-gray-700 capitalize dark:text-gray-200">Your email</label>
+                          <input placeholder="xyz@gmail.com" type="email"
+                            class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                        </div>
+
+                        <div class="mt-4">
+                          <h1 class="text-xs font-medium text-gray-400 uppercase">Extra options</h1>
+
+                          <div class="mt-4 space-y-5">
+                            <div class="flex items-center space-x-3 cursor-pointer" x-data="{ show: false }" @click="show =!show">
+                              <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full" :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
+                                <label for="show" @click="show =!show" class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
+                                  :class="[show ? 'translate-x-full border-indigo-500' : 'translate-x-0 border-gray-300']"></label>
+                                <input type="checkbox" name="show" class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
+                              </div>
+
+                              <p class="text-gray-500">Have more friends to participate</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="flex justify-end mt-6">
+                          <button onclick="submitRequest();" type="submit"
+                            class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                            Request
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </ul>
           </div>
         </div>
@@ -92,7 +159,7 @@ uration-150">
                 <div class="h-90 bg-gradient-to-r rounded-md from-indigo-600 to-purple-600 p-10">
                   <p class="text-3xl font-thin text-indigo-50 cursor-pointer">The Complete Ethical Hacking Course</p>
                   <div class="flex items-center mt-4 space-x-4">
-                    <img class="w-10 h-10 rounded-full cursor-pointer" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                    <img class="w-10 h-10 rounded-full cursor-pointer" src="images/tutor1.jpg" alt="tutor1" />
                     <div>
                       <h3 class="text-indigo-50 font-semibold cursor-pointer">Ayusha Maharjan</h3>
                       <p class="text-indigo-50 text-sm font-thin">0 joined • 10 days from now</p>
@@ -119,8 +186,7 @@ uration-150">
                   <div class="p-2 relative">
                     <p class="text-lg mt-6 font-semibold">Microsoft Excel - Excel from Beginner to Advanced</p>
                     <p>5K joined • 6 weeks ago</p>
-                    <img class="h-12 w-12 rounded-full absolute -top-6 p-0.5 border-2 right-6"
-                      src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                    <img class="h-12 w-12 rounded-full absolute -top-6 p-0.5 border-2 right-6" src="images/tutor1.jpg" alt="tutor1" />
                   </div>
                 </div>
               </div>
@@ -131,7 +197,7 @@ uration-150">
                     <p class="text-lg mt-6 font-semibold">High School Math (Pure Mathematics 1)</p>
                     <p>2K joined • 4 weeks ago</p>
                     <img class="h-12 w-12 rounded-full absolute -top-6 p-0.5 border-2 right-6"
-                      src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                      src="images/tutor5.png" alt="" />
                   </div>
                 </div>
               </div>
@@ -142,7 +208,7 @@ uration-150">
                     <p class="text-lg mt-6 font-semibold">Introductory Biology</p>
                     <p>9k joined • 7 weeks ago</p>
                     <img class="h-12 w-12 rounded-full absolute -top-6 p-0.5 border-2 right-6"
-                      src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                      src="images/tutor2.jpg" alt="" />
                   </div>
                 </div>
               </div>
@@ -157,7 +223,7 @@ uration-150">
                       <p class="text-lg mt-6 font-semibold">High School Math (Pure Mathematics 1)</p>
                       <p>2K joined • 4 weeks ago</p>
                       <img class="h-12 w-12 rounded-full absolute -top-6 p-0.5 border-2 right-6"
-                        src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                        src="images/tutor1.jpg" alt="" />
                     </div>
                   </div>
                 </div>
@@ -169,7 +235,7 @@ uration-150">
                       <p class="text-lg mt-6 font-semibold">Introductory Biology</p>
                       <p>680 views • 6 days ago</p>
                       <img class="h-12 w-12 rounded-full absolute -top-6 p-0.5 border-2 right-6"
-                        src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                        src="images/tutor4.jpg" alt="" />
                     </div>
                   </div>
                 </div>
@@ -181,7 +247,7 @@ uration-150">
                       <p class="text-lg mt-6 font-semibold">Learn Python: The Complete Python Programming Course</p>
                       <p>1K joined • 2 weeks ago</p>
                       <img class="h-12 w-12 rounded-full absolute -top-6 p-0.5 border-2 right-6"
-                        src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                        src="images/tutor5.png" alt="" />
                     </div>
                   </div>
                 </div>
@@ -192,7 +258,7 @@ uration-150">
                       <p class="text-lg mt-6 font-semibold">Microsoft Excel - Excel from Beginner to Advanced</p>
                       <p>5K joined • 6 weeks ago</p>
                       <img class="h-12 w-12 rounded-full absolute -top-6 p-0.5 border-2 right-6"
-                        src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                        src="images/tutor3.jpg" alt="" />
                     </div>
                   </div>
                 </div>
@@ -209,10 +275,10 @@ uration-150">
                 <div class="">
                   <img class="w-sm" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" alt="" />
                   <div class="p-2 relative">
-                    <p class="text-lg mt-6 font-semibold">Basic how to ride your skateboard comfortly</p>
-                    <p>53K views • 6 weeks ago</p>
+                    <p class="text-lg mt-6 font-semibold">High School Computer Science</p>
+                    <p>join class • 2<sup>nd</sup> april</p>
                     <img class="h-12 w-12 rounded-full absolute -top-6 p-0.5 border-2 right-6"
-                      src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                      src="images/tutor4.jpg" alt="" />
                   </div>
                 </div>
               </div>
@@ -249,7 +315,7 @@ uration-150">
                         </div>
                         <div class='w-full md:w-full px-3 mb-6'>
                           <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Bio</label>
-                          <textarea class='bg-gray-100 rounded-md border leading-normal resize-none w-full h-20 py-2 px-3 shadow-inner border border-gray-400 font-medium placeholder-gray-700 focus:outline-none focus:bg-white' required>lover</textarea>
+                          <textarea class='bg-gray-100 rounded-md border leading-normal resize-none w-full h-20 py-2 px-3 shadow-inner border border-gray-400 font-medium placeholder-gray-700 focus:outline-none focus:bg-white' required></textarea>
                         </div>
                       </div>
                     </div>
@@ -350,6 +416,7 @@ uration-150">
     </main>
   </div>
   <!-- javascript -->
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
   <script type="text/javascript">
     function switchVisible() {
       document.getElementById('div1').style.display = 'inline-block';
@@ -364,6 +431,7 @@ uration-150">
       document.getElementById('div3').style.display = 'none';
       document.getElementById('div4').style.display = 'none';
     }
+
     function switchVisible3() {
       document.getElementById('div1').style.display = 'none';
       document.getElementById('div2').style.display = 'none';
@@ -376,6 +444,10 @@ uration-150">
       document.getElementById('div2').style.display = 'none';
       document.getElementById('div3').style.display = 'none';
       document.getElementById('div4').style.display = 'block';
+    }
+
+    function submitRequest(){
+      alert("Your inquiry has been forwarded to our team. We will send you an email shortly.");
     }
 
     function easterEgg() {
